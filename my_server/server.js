@@ -95,36 +95,48 @@ app.get('/generate-id', (req, res) => {
 });
 
 
+
 // Endpoint to upload JSON data to a specific file
 app.post('/upload/:filename', (req, res) => {
   const jsonData = req.body;
   const { filename } = req.params;
   const filepath = path.join(uploadsDir, filename);
 
-  fs.readFile(filepath, 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading file:', err);
-      return res.status(500).send('Error reading file.');
-    }
-
+  fs.readFile(filepath, 'utf8', (readErr, data) => {
     let fileContent;
-    try {
-      fileContent = JSON.parse(data);
-    } catch (parseError) {
-      return res.status(500).send('Error parsing JSON in file.');
+
+    if (readErr) {
+      if (readErr.code === 'ENOENT') {
+        // If file does not exist, start with an empty array
+        fileContent = [];
+      } else {
+        console.error('Error reading file:', readErr);
+        return res.status(500).send('Error reading file.');
+      }
+    } else {
+      try {
+        fileContent = JSON.parse(data);
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
+        // If existing file content is not valid JSON, start with an empty array
+        fileContent = [];
+      }
     }
 
-    fileContent = fileContent.concat(jsonData);
+    // Append new data to the JSON array
+    fileContent.push(jsonData);
 
     fs.writeFile(filepath, JSON.stringify(fileContent, null, 2), (writeErr) => {
       if (writeErr) {
-        console.error('Error writing JSON to file:', writeErr);
-        return res.status(500).send('Error writing JSON to file.');
+        console.error('Error writing to file:', writeErr);
+        return res.status(500).send('Error writing to file.');
       }
       res.status(200).send({ message: 'JSON appended successfully.' });
     });
   });
 });
+
+
 
 //Admin endpoints start
 app.get('/files', (req, res) => {
@@ -187,23 +199,6 @@ app.put('/edit/:filename', (req, res) => {
 });
 
 
-app.post('/create', (req, res) => {
-  const content = req.body.content;
-  const uniqueId = generateRandomId(4); // Using your existing function
-  const filename = `file_${uniqueId}.json`;
-  const filepath = path.join(uploadsDir, filename);
-
-  fs.writeFile(filepath, JSON.stringify([], null, 2), (err) => {
-    if (err) {
-      console.error('Error creating file:', err);
-      return res.status(500).send('Error creating file.');
-    }
-    res.send({ message: `File ${filename} created successfully.` });
-  });
-});
-
-
-
 app.post('/upload', upload, (req, res) => {
   // req.file is the 'file' uploaded
   console.log(req.file);
@@ -216,7 +211,21 @@ app.post('/upload', upload, (req, res) => {
 
 app.use('/uploads', express.static('uploads'));
 
+app.use((req, res, next) => {
+  console.log(req.body); // Log the raw body
+  next();
+});
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).send({ message: "Bad JSON" });
+  }
+  next();
+});
+
+
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
   console.log(`Server listening at http://10.0.2.2:${port}`);
+ console.log(`Server listening at http://192.168.0.108:${port}`);
 });

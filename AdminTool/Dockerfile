@@ -1,5 +1,5 @@
 # Start with a base image that has the dependencies for Flutter
-FROM ubuntu:20.04 AS build
+FROM ubuntu:22.04 AS build
 
 # Install Flutter dependencies
 RUN apt-get update && \

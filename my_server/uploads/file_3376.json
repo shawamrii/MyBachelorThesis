@@ -1,0 +1,260 @@
+[
+  [
+    {
+      "Event": "Setting Screen starts",
+      "Timestamp": "2023-12-06T16:43:20.394749",
+      "type": "Setting",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Device Infos",
+      "Device ID": "f9f58d0942a46bc8",
+      "Session ID": "65b73b36-f426-427c-9d85-56bfacb0dfe5",
+      "Device Type": "Android",
+      "Screen Resolution": "392.72727272727275x783.2727272727273",
+      "Orientation": "portrait",
+      "Accelerometer Data": {
+        "X": 0,
+        "Y": 9.776321411132812,
+        "Z": 0.812345027923584
+      },
+      "Screen Brightness": "0.40",
+      "Timestamp": "2023-12-06T16:43:21.185594",
+      "type": "Setting",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Setting Screen ends",
+      "Timestamp": "2023-12-06T16:43:22.484347",
+      "type": "Setting",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "The Signature Screen starts",
+      "Timestamp": "2023-12-06T16:43:23.797429",
+      "type": "Signature",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "User Signature",
+      "Signature": "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",
+      "Timestamp": "2023-12-06T16:43:26.018920",
+      "type": "Signature",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "The Privacy Screen starts",
+      "Timestamp": "2023-12-06T16:43:22.552726",
+      "type": "Instrucion",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "The Privacy ends",
+      "Timestamp": "2023-12-06T16:43:26.064283",
+      "type": "Instrucion",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "BMS Survey Nr. 1 starts",
+      "Timestamp": "2023-12-06T16:43:26.111785",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an körperlicher Müdigkeit oder Erschöpfung.",
+      "BMS(1) Answer": 1,
+      "Timestamp": "2023-12-06T16:43:27.188205",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an Fokus, Aufmerksamkeit oder geistiger Konzentration.",
+      "BMS(1) Answer": 1,
+      "Timestamp": "2023-12-06T16:43:27.188423",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an Motivation, die Technologie zu nutzen.",
+      "BMS(1) Answer": 1,
+      "Timestamp": "2023-12-06T16:43:27.189538",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "BMS(1) Question": "Bewerten Sie Ihre aktuelle emotionale Verfassung oder Stimmung.",
+      "BMS(1) Answer": 1,
+      "Timestamp": "2023-12-06T16:43:27.189692",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "BMS Survey Nr. 1 ends",
+      "Timestamp": "2023-12-06T16:43:27.189795",
+      "type": "BMS 1",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "Password Screen starts",
+      "Timestamp": "2023-12-06T16:43:27.271645",
+      "type": "Password",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "password_length": 4,
+      "password": "0000",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "numberOfShapes": 10,
+      "shapeSize": 25,
+      "movementDuration": 3,
+      "speed": 3,
+      "shapeType": "ShapeType.circle",
+      "textColor": "Color(0xff000000)",
+      "shapeColor": "Color(0xffffffff)",
+      "backgroundColor": "Color(0xff000000)",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "description": "Password Screen ends",
+      "timestamp": "2023-12-06T16:43:30.320522",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Password Screen ends",
+      "Timestamp": "2023-12-06T16:43:30.320584",
+      "type": "Password",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "Password Screen starts",
+      "Timestamp": "2023-12-06T16:43:37.177664",
+      "type": "Password",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "password_length": 4,
+      "password": "0000",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "numberOfShapes": 10,
+      "shapeSize": 25,
+      "movementDuration": 3,
+      "speed": 3,
+      "shapeType": "ShapeType.circle",
+      "textColor": "Color(0xff000000)",
+      "shapeColor": "Color(0xffffffff)",
+      "backgroundColor": "Color(0xff000000)",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Password",
+      "description": "Password Screen ends",
+      "timestamp": "2023-12-06T16:43:40.834368",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Password Screen ends",
+      "Timestamp": "2023-12-06T16:43:40.834420",
+      "type": "Password",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "Event": "The Test Animation Screen starts",
+      "Game Nr.": 1,
+      "Reload Nr.": 0,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:40.891687",
+      "type": "Test",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "The Test Animation Screen starts",
+      "Game Nr.": 2,
+      "Reload Nr.": 1,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:40.921516",
+      "type": "Test",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Reload Button clicked",
+      "Reload Nr.": 1,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:44.686485",
+      "type": "Test",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "The Test Animation Screen starts",
+      "Game Nr.": 2,
+      "Reload Nr.": 2,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:44.686776",
+      "type": "Test",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Skip The Animation Test Screen",
+      "Game Nr.": 2,
+      "Reload Nr.": 2,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:45.831290",
+      "type": "Test",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ],
+  [
+    {
+      "type": "Animation",
+      "Event": "The Animation Screen starts",
+      "Round": 1,
+      "Reload Nr.": 0,
+      "Timestamp": "2023-12-06T16:43:45.878999",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "type": "Animation",
+      "Event": "Play button clicked",
+      "Round": 1,
+      "Reload Nr.": 1,
+      "Timestamp": "2023-12-06T16:43:47.252138",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Reload Button clicked",
+      "Reload Nr.": 1,
+      "Round": 1,
+      "Timestamp": "2023-12-06T16:43:48.703006",
+      "type": "Animation",
+      "User Id": "f9f58d0942a46bc8"
+    },
+    {
+      "Event": "Close button clicked",
+      "Round": 1,
+      "Reload Nr.": 2,
+      "Timestamp": "2023-12-06T16:43:49.604801",
+      "type": "Animation",
+      "User Id": "f9f58d0942a46bc8"
+    }
+  ]
+]
