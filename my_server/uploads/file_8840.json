@@ -1,0 +1,435 @@
+[
+  {
+    "Event": "Setting Screen starts",
+    "Timestamp": "2023-12-05T21:13:32.957614",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Device Infos",
+    "Device ID": "f9f58d0942a46bc8",
+    "Session ID": "99d857e7-9765-460c-9575-9faf1d5d0d77",
+    "Device Type": "Android",
+    "Screen Resolution": "392.72727272727275x783.2727272727273",
+    "Orientation": "portrait",
+    "Accelerometer Data": {
+      "X": 0,
+      "Y": 9.776321411132812,
+      "Z": 0.812345027923584
+    },
+    "Screen Brightness": "0.40",
+    "Timestamp": "2023-12-05T21:13:33.698800",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Setting Screen ends",
+    "Timestamp": "2023-12-05T21:13:34.676615",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "The Signature Screen starts",
+    "Timestamp": "2023-12-05T21:13:36.774171",
+    "type": "Signature",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "User Signature",
+    "Signature": "iVBORw0KGgoAAAANSUhEUgAAAQUAAACjCAYAAACDpAvWAAAAAXNSR0IArs4c6QAAAARzQklUCAgICHwIZIgAABEySURBVHic7d15uBxVmcfxbwgQAoMgcQHBIUrEYVGCKMtwESMiqCyCDKKIhF0HUXBwEJAlIBAQJ4wLErYEIaIYNoFEIAEBQQmYhRCWkIQlxokwIcwQuDEQ2j/OLbtu9XuqlzpV1X3793me8+Tm3urzvn2fOu/t2s4BEREREZ/BZScgIv+wHnA6sBnwWMm5iEiJeoBvAe8GKsDUMpNZs8zgIkIPcDuwAbB+ybmISMm2An6B+3TgazuXlp2IFGoI8Chu4N+DioJI17uB/oN/Hm1SFHROQaR4Y4F/S3xva2A18CbwDLAQWAAMKjY1ESnasdifCP7m+f7QctIUkSJ8Cv+5g/OM780pI0kdPogU4/3AtZ6fnYYrAkmz8ktHRMr2IPYnhMv7fp488VgBvll8miJShGuxC8K02DYLjJ/3FJumiBRhDHZBWAS8p2+bYZ5t1i06WRHJ13j8JxZ3jW23p/FzPRAlMsB8BTe4Z1I74A9LbHuWsc3EwjIVkdxFBSFq02Nfn2VsPwl4HngYuA94BLiokExFJHfJghC1ycA1ntfMNrYflXumIpI7X0GoALd4XjMId2tzcvt35Z2siOSrlYIAsK2x/V9yzVREctdqQQA4xHjNXbllKiK5y1IQAM41Xjcul0xFJHdZCwLATcZrjw6eqYjkLkRBAJhvvF6zLYl0mFAFYV1PH5rAVaSDHIybgj1rQQDY3ehjQbBMRSR3e1EdvMnJVpstCABTgF7gBaozL90aJFMRyd1OwKv0LwS/7/v35hb6+2Cir1m4BWEOCpGsiOTrg8CfsQ8ZHmmxz+uMvlYDm2dNVkTytTHwOHZBuJfW1mMd5elvTIB8RSRH61A9REi2mcBGLfZrLf6yGFgrY74ikrM7sAvCItxErK041NPncVmTFZF8TcIevMuA7TP0+5TR58OZMhWR3F2KXRBWk22eg+94+t03S7Iikq/z8d+t+PkM/Q4D/t/os5XLmSJSkFPwF4TRGfse5+l3h4z9ikhOjsNfEE7M2PeHPP3+NGO/IpKTL+IvCNZEq82yVn/qBTYJ0LeIBLY3/oIQYrKT+PMS8XZ6gL5FJLCdgdewB+3VgWJYNz8tDNS3iAS0FbAEuyDcFCjGkZ7+jwjUf6t2x73H5cAKYEK56YiUbxPgCewBOx037XoIU6k+Eh21BwL13YwhwIHAVcBS7Pd9YQl5ibSFDYE/Yg+MPwFvDxTnpL4+XwDuj8X4dKD+69kUOAY3z8Mb2O+37GIl0hZ+C8wFXqL/oFgADA8UYzBu7YZ4/4uAGYH69/kwcCpugNcrAsl2Sc65ibSlyVQHwXzg2b6vXwJGBoxzKvbA+0jAGJFRwMXAk56YjbQbgbVzyE2krU2gdjAsxs2VsHvAOOsBLxuxQq4ifRDu/bxoxGmkrcSdaDwKeG/AvEQ6xo/wD5CDA8c62xNnmwB974Q7eflTYJUnjq8tAS7HPb+heRukq52Hf6AcGjjWMOz7Hi7L2O87gJ8k+vydESfZHgMuAHoyxhcZML6Lf8B8LYd4Yz2xtsjQ54nAK0afcz2x7gVOxt2HISIxx+MvCCfnEG9T3HwLoc7q74u7RFrv00Av7gTqEWj5ehGvr+IfRHlNjnqJEestXLFoxmeBXxl9Jdsc3NwPrUwcK9JVDsA/kP4rp5jWSk8VmrtLcEvcuQffHYdRW0E+n3REBqRP4R9MV+QY9yrgUeCZWLzXcSce6/kA8DP65/oQ9nu4DDflvIg0YCfs6c4qwC9zjLtrItY9uKcg6x2mjMA/F+QS+l/FuBtdQRBpytb4n3i8I+fYvzVivoj/pN96uPsM6p0z+A3ujsvDc8xdZEB6L/a06RXcg0hDcox9sCfuCZ7td8RdSrzM87qoLcNNwqKTiCJN2hC3lqM1sGbhbvrJ02OeuJbRuKsR0Xb3Ga99GfgeMDTXrEUGqDWxl1+r4J54fF/O8aNHo5PtQGPbHxjbrYh9vRw4A1g355xFBrRbsQflUtwjxHnaAPcRPxn79sR2G+Nfeq6CezrzTNx5BhHJwFrGvYI7Y79rAfGtv/wV3JyPkT2A5zzbVXBLxW1bQK4iA17aSbq9C4jvm/15fGyb0cCdKXlOINyUbyJdzfcXuoKbY6AId+ImNFkei/0G1XkJRlP9JPCCkafuRhQJ5Ez8BaGo2ZHPiMVcAUzp+zpaMObwRF7xJxmX4p5rEJEATsZfEL5ZUA6jPPF/DaxBbUGI2kLc5cfNC8pTZMDbH/dEoPU8QFGrLK0FzDPiV3CzM6c9lTm5oBxFusKWVOc7XIk7To8G29gC8xiPPeDPIb0g3FhgjiJd4UFqB9psil2teRRwDf3XbqjgbpxSQRAp0BXYg+2WgvO4LRb7D33/rsI94Zhc2yFqoZadE5E+38YebPOBjQrMw3dycUHs64WoIIjk6jP4P5IXcbdiXPxTQtR6E/9/Frd2hAqCSA6GA/+DXRCOLjiXwbjbkC+g/41KVrsNuLng/ES6gu+pxx+WkMtunlysltfcjyJdzTcb0dQScrke+ylI61DisBLyExnwvoE96J6j+IlK026njreH0FOOIrnYA//AG1VCPlNT8olakfdJiHSVTYDnsQfe8SXkszawjyefCm46taJPeIp0FWsm5ApuMdUy+KaIr+CWcNuhpLxEusI47ME3vcSc4vMmxtty3JOQIpKTY7AH31+Afy4ppzGenCrAl0vKSaQURT/n34N/8BUxnZrl8yk5vYmmXJcu8h7cbbpFXWsfRv/1FuPtpIJySNoct6KTryhoPgTpKvGJQx4EvkC+H99907JfnmPMenwTrD7d9++h5aUmUqzfYA+GGTnFG+uJ9/uc4jXiQk9OFdwUaiPQmgzSJU7APxh+nkM83/yFy3BLsZfhaE9O8XZASbmJFOrTwPn4/3KHXuV4R2C1J9Z+gWM1Yx7u8qevIBxZXmoixbqS6o5vDdatA8Zan+pcA8l2SsA4zfqaJ6foPgWtzSBdYw3g//D/dVweON6vPXGuCRynWcnZkuLt3hLzEincIaQfQ98VMNY5nhgzKPfuwBM9eVWAaSXmJVKKJ7A/Mk8GbgDOCxTnS0acCvAqsE2gGK1YA7dSk5XbSuBfyktNpHhn4Xb+V7AHxTxglwBxtqN2HsOoFbXeo88p+D8l6OlH6SpRQYjaa9QOihBzDK4NzDT6ruAmLynTuvgL4sQS8xIpXLIg+Nq/Bog1ydP39QH6zsr3e3gVeFuJeYkUqtGC8KsAsU739D0bWCdA/1lsBPwNOz9dfpSu0WhBqAAfyxjrQE+/q4DtM/YdwmTs/P4KDCoxL5HCNFMQrssYayv8x+rt8DDRUOB31OY2E7cSlciAlzZZiNVGZowXra+YbN/P2G8ouwBX4R5wWkXYE6sibe9Y3M1B8SXbo2ZdJpyQMd7VRp8V2mvF5Quoze9NYEiZSYkUYU+qO/1LwJzY/60l3Stke87hO54+nwQ2yNBvaOdSm+PCUjMSKcAW2GswzsfNjGzNUjw+Q7yDjP6itnOGfvPwPdwng3h7utSMRHI2CP8ngaux/1JWaH0egx5giafPI1p9EyISznXYA3Qa8A7scwmtrqvQQ/VKw7P0X8jlBy2/AxEJxvck4iLcpKx3AYuNn7cyg3O8IETtKdxEJbdneRMiEsZo/Mf1u+Ke+Iv+fz/Vj/ytLJtuFYSozQbemeF9iEgAH8dfEKLp2pOHFa8BU3CfIJpRryBsmuF9iEgAm+GWaLcG6Vl923zS8/Ozm4zVg3+mJhUEkTZxD/YgvabONouBNZuIo4Ig0gFmYA/SB2LbfMWzzbFNxFFBEOkAF+MG5UzgdaqDdAkwPLbd09QO5D82ESetIMxCBUGkLZxG/8E5F3c5sII7fxDxTTe2T4NxdkMFQaTtfR17kC7EPREZeSduFqHkdjc1GEcFQaQDfBH/pcdTE9v+t2e7jzQQRwVBpAPEn3pMtosS227n2a6R25lVEEQ6wA74bxi60tjeWonpdWDjOnFUEEQ6wPtxDxtZA9U6P3CmZ9vT6sRRQRDpABsCf8IeqPcCgxPbD8XNmbCM/ustLKgTRwVBpEPcjT1Q5+Aeg04an9juTtzNRWnLyasgiHSIG7AH6mJgS2N732KxU1JiqCBIIbalfWbu7VSXYQ/UFdjTm70bt2ZBcvte7AIC9QtCs09PinjdhtuxngD2KzmXTnQ+/kuPn/G85pee7X3PN+yGPU+jCoIEdyS1O9lE6l8KE+dk/AXBt5DKcZ7tfes1qiBIYd6O/RH2qTKT6iBH4S8I3/C8ZkvsOReX4g4pklQQpFC+4+ADykyqQ/gWY62QvmT7FM9rDjG2TSsIM1FBkMD2wt7Zfl5mUh3iq1T/uid/f5ekvM63+Iq1fsPHUUGQgs2idmd7FV3Sqid+DmE5bjWlRgrqR7EH+Hxql3lXQZDCnUFzx8HiXIQ9qB/AXcFJMx23QGq9qxMqCFK4D2HvcNPLTKoDTMR/DuFuav/axx0d2za+pHrySUkVBCnFzbhbaZM73Y5lJtXG1sd/crACTKrz+nWAPydesxz3CSNOBUFK8QWqO9ozwCN9X19QZlJtbAvgUfwFYVwDfYz1vHav2DYqCFKaudg7ndTaBXgBf0FIzppk8R2qXRvbRgVBSvNd7B3vS2Um1ab2B1biLwhHNdjPjZ7Xb9H3832Axz3bqCBIrjbD3snvKDOpNnUM/mLwOrBvg/0c4OkjWgEqfvLxIVQQpGBXYu+gHy0zqTaUdpfic8BOTfQ1x+jjmZQ40cnfmcAmGd+HSKpPYO/kaXfedaNL8BeEGcD7mujLd+fiocCPUuJMRgVBChC/Lh61/8VNGybOL/AP1DuA9Zrsbyy1E65MMb6X/PnbMr4Pkbrix63xpjsXnWHANPwDdUILfX4u9voncXMtVrBvK88SR6QltwNXAIuo7oDNrEk4kO0NPIZ/oF7YYr/W+RvrUemojW35HYg0KXmNPFq09LNlJtUmvox7+Mt3H8J/ZOh7madPq52UIY5I06y1BB4pNaP2MI7q72MJ7pbj+O/osAx970PjBUH3h0jhrGPYb5eaUbm2wT3NmPydRE8uvkL/W49bEa0indZepP8q0yKF8K1L2MxltYHkcNLvULwe2D5AjHoFYS6uOIkU7j7gDfrvkPeXmlF5fkL6QJ0E/FPGGCOwl5CPt2m4qx0ihRsOvIXbEWfidsZVdN9JrZG4Ky1pA/XEQLGm14lzXaA4Ii25gtqd8mrcoqfd4hhgNf5B+jjQEyjWj1PiVIAfBooj0pLtcAu6dOu18EHUrs2YbBOBIYHiXUx68fnPQHFEWjYCdwZ9PNVj3JfJfszcCT5G/1WbrXZ8wHi31ImVtkCsSGHOpnbnnFpqRsX4d9IH6CzCTjdnHaJFrZfslzZFgrGKwtmlZpSvDYAHSS8IlwNrBIzpewy9gptBaWTAWCKZdVNR2B94HvcercLwFv7FWrO6y4j3EnrsWdpQtxQFa+6DebGvZ5D9ZqR67o7FexF3klOkLYT8aNzuPoGb0ehbxs9W9v17Ke78waycc9kTuAf3/MS7cMVBpC2sGfu6F1iY+HlvgbnkaQzpC7eOwC2YG/IKQz17FBhLpCUD8fBhJPZya/F2K+5OThFJsIrCjaVmlM1JpBeDCuFuVRYZMOKHD0uB2X1fD8fNw3ggcALudtwQBuOWQvO1oXV+3uhrPoBbss3nPty5hTmB3pfIgGGd9b4U+Hrie3fiJnHNOnjXCv4OmjeGzj8sEinMudT/yN0p7eHE/2cDu4f7VYl0j7SpxDupnUN1NuRGFnMVkRQ/ozq44vMSdlI7Dzdl+n6BfzciA1ranXTfBxYDfwVuDhRvNe5GoUZbb5PbJ1+zKFDeIl2jkdtrR+H+2oYYvKvCpi8iIiIiIsX5Oy7AuLhyyYiUAAAAAElFTkSuQmCC",
+    "Timestamp": "2023-12-05T21:13:39.289142",
+    "type": "Signature",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "The Privacy Screen starts",
+    "Timestamp": "2023-12-05T21:13:34.808579",
+    "type": "Instrucion",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "The Privacy ends",
+    "Timestamp": "2023-12-05T21:13:39.310439",
+    "type": "Instrucion",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "BMS Survey Nr. 1 starts",
+    "Timestamp": "2023-12-05T21:13:39.351113",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an körperlicher Müdigkeit oder Erschöpfung.",
+    "BMS(1) Answer": 1,
+    "Timestamp": "2023-12-05T21:13:40.545118",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an Fokus, Aufmerksamkeit oder geistiger Konzentration.",
+    "BMS(1) Answer": 1,
+    "Timestamp": "2023-12-05T21:13:40.545231",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(1) Question": "Bewerten Sie Ihr aktuelles Maß an Motivation, die Technologie zu nutzen.",
+    "BMS(1) Answer": 1,
+    "Timestamp": "2023-12-05T21:13:40.545259",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(1) Question": "Bewerten Sie Ihre aktuelle emotionale Verfassung oder Stimmung.",
+    "BMS(1) Answer": 1,
+    "Timestamp": "2023-12-05T21:13:40.545282",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "BMS Survey Nr. 1 ends",
+    "Timestamp": "2023-12-05T21:13:40.545314",
+    "type": "BMS 1",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "Password Screen starts",
+    "Timestamp": "2023-12-05T21:13:40.610022",
+    "type": "Password",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "password_length": 4,
+    "password": "0000",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "numberOfShapes": 10,
+    "shapeSize": 25,
+    "movementDuration": 3,
+    "speed": 3,
+    "shapeType": "ShapeType.circle",
+    "textColor": "Color(0xff000000)",
+    "shapeColor": "Color(0xffffffff)",
+    "backgroundColor": "Color(0xff000000)",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "description": "Password Screen ends",
+    "timestamp": "2023-12-05T21:13:44.957160",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Password Screen ends",
+    "Timestamp": "2023-12-05T21:13:44.957402",
+    "type": "Password",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "Password Screen starts",
+    "Timestamp": "2023-12-05T21:13:55.811187",
+    "type": "Password",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "password_length": 4,
+    "password": "0000",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "numberOfShapes": 10,
+    "shapeSize": 25,
+    "movementDuration": 3,
+    "speed": 3,
+    "shapeType": "ShapeType.circle",
+    "textColor": "Color(0xff000000)",
+    "shapeColor": "Color(0xffffffff)",
+    "backgroundColor": "Color(0xff000000)",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Password",
+    "description": "Password Screen ends",
+    "timestamp": "2023-12-05T21:14:00.457999",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Password Screen ends",
+    "Timestamp": "2023-12-05T21:14:00.458067",
+    "type": "Password",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "The Test Animation Screen starts",
+    "Game Nr.": 1,
+    "Reload Nr.": 0,
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:16.762916",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "The Test Animation Screen starts",
+    "Game Nr.": 2,
+    "Reload Nr.": 1,
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:16.790075",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Test",
+    "Event": "Play button clicked",
+    "Round": 4,
+    "Reload Nr.": 1,
+    "Timestamp": "2023-12-05T21:14:19.741109",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Test Animation Screen touched",
+    "Game Nr.": 2,
+    "Reload Nr.": 1,
+    "Position.": "Offset(181.1, 602.9)",
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:21.071991",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Circle touched",
+    "ID": "a",
+    "Reload Nr.": 1,
+    "Round": 4,
+    "isPin": "false",
+    "Timestamp": "2023-12-05T21:14:22.073980",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Circle touched",
+    "ID": "0",
+    "Reload Nr.": 1,
+    "Round": 4,
+    "isPin": "true",
+    "Timestamp": "2023-12-05T21:14:23.180533",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "The Animation Test Game finished",
+    "Game Nr.": 2,
+    "Reload Nr.": 1,
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:23.180643",
+    "type": "Test",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "type": "Animation",
+    "Event": "The Animation Screen starts",
+    "Round": 4,
+    "Reload Nr.": 0,
+    "Timestamp": "2023-12-05T21:14:45.133873",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "type": "Animation",
+    "Event": "Play button clicked",
+    "Round": 4,
+    "Reload Nr.": 1,
+    "Timestamp": "2023-12-05T21:14:48.324505",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Animation Screen touched",
+    "Reload Nr.": 1,
+    "Position.": "Offset(324.0, 638.5)",
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:50.104779",
+    "type": "Animation",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Animation Screen touched",
+    "Reload Nr.": 1,
+    "Position.": "Offset(319.6, 499.2)",
+    "Round": 4,
+    "Timestamp": "2023-12-05T21:14:50.784516",
+    "type": "Animation",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Circle touched",
+    "ID": "0",
+    "Reload Nr.": 1,
+    "Round": 4,
+    "isPin": "true",
+    "Timestamp": "2023-12-05T21:14:51.533360",
+    "type": "Animation",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "The Animation Screen finished",
+    "Round": 4,
+    "Reload Nr.": 1,
+    "Timestamp": "2023-12-05T21:14:51.533530",
+    "type": "Animation",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "BMS Survey Nr. 2 starts",
+    "Timestamp": "2023-12-05T21:14:51.637456",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(2) Question": "Bewerten Sie Ihr aktuelles Maß an körperlicher Müdigkeit oder Erschöpfung.",
+    "BMS(2) Answer": 1,
+    "Timestamp": "2023-12-05T21:14:53.486865",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(2) Question": "Bewerten Sie Ihr aktuelles Maß an Fokus, Aufmerksamkeit oder geistiger Konzentration.",
+    "BMS(2) Answer": 1,
+    "Timestamp": "2023-12-05T21:14:53.486919",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(2) Question": "Bewerten Sie Ihr aktuelles Maß an Motivation, die Technologie zu nutzen.",
+    "BMS(2) Answer": 1,
+    "Timestamp": "2023-12-05T21:14:53.486937",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "BMS(2) Question": "Bewerten Sie Ihre aktuelle emotionale Verfassung oder Stimmung.",
+    "BMS(2) Answer": 1,
+    "Timestamp": "2023-12-05T21:14:53.486963",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "BMS Survey Nr. 2 ends",
+    "Timestamp": "2023-12-05T21:14:53.486982",
+    "type": "BMS 2",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "Event": "SUS Survey starts",
+    "Timestamp": "2023-12-05T21:14:53.530056",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich würde das System gerne häufiger verwenden",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.538914",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich finde das System unnötig komplex",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.538987",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich finde, das System war leicht zu bedienen",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539004",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich hatte das Gefühl, bei der Bedienung die Kontrolle über das System zu haben",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539028",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich finde, das System war umständlich zu bedienen",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539040",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Mir hat die Darstellung des Systems sehr gut gefallen",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539047",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich hatte das Gefühl, dass das System viel zu schnell ablief",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539053",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Die Benutzung hat mir Spaß gemacht",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539060",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich musste viele Dinge lernen, bevor ich mit diesem System loslegen konnte",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539072",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "SUS Question": "Ich könnte mir vorstellen, dass die meisten Menschen sehr schnell lernen würden, mit diesem System umzugehen",
+    "SUS Answer": 1,
+    "Timestamp": "2023-12-05T21:14:54.539084",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "SUS Survey ends",
+    "Timestamp": "2023-12-05T21:14:54.539092",
+    "type": "SUS",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]
+[
+  {
+    "ageGroup": "18-24",
+    "gender": "Männlich/Man",
+    "unlockDuration": "",
+    "deviceType": "iPhone",
+    "type": "Demographic",
+    "User Id": "f9f58d0942a46bc8"
+  }
+]

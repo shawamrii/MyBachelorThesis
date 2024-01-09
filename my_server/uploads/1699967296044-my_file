@@ -1,0 +1,19 @@
+To fix the issue with negative temperatures, you need to modify this method to properly handle negative values:
+
+    Remove Positive Check and Absolute Conversion: Eliminate the logic that checks for positive values and the application of Math.Abs. This will allow the method to process negative values correctly.
+
+    Correct Interpretation of Data: Ensure that ConvertHoldingRegToTemperature correctly interprets the Modbus register data, especially regarding signed integers. Modbus registers are often 16-bit, and representing negative numbers usually involves two's complement or similar encoding.
+
+    Efficient Error Handling: If the disconnect-reconnect logic is for error handling, consider implementing a more efficient method. Continuous disconnections and reconnections might not be the best approach for handling read errors.
+
+Here's a revised version of your method:
+
+
+public float ReadHoldingregisterConvertToFloat(int startingAddress, int quantity)
+{
+    int[] holdingRegArray = ReadHoldingRegister(startingAddress, quantity);
+    // Assuming ConvertHoldingRegToTemperature correctly handles the conversion, including negative values
+    float holdingRegFloatString = ConvertHoldingRegToTemperature(holdingRegArray);
+    return holdingRegFloatString;
+}
+

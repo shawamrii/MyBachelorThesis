@@ -1,0 +1,60 @@
+[
+  {
+    "Event": "Setting Screen starts",
+    "Timestamp": "2023-12-05T22:18:48.110494",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Device Infos",
+    "Device ID": "f9f58d0942a46bc8",
+    "Session ID": "4167c020-dfc7-4bd5-ab80-152c99d85d89",
+    "Device Type": "Android",
+    "Screen Resolution": "392.72727272727275x783.2727272727273",
+    "Orientation": "portrait",
+    "Accelerometer Data": {
+      "X": 0,
+      "Y": 9.776321411132812,
+      "Z": 0.812345027923584
+    },
+    "Screen Brightness": "0.40",
+    "Timestamp": "2023-12-05T22:18:49.446232",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "Setting Screen ends",
+    "Timestamp": "2023-12-05T22:18:52.897269",
+    "type": "Setting",
+    "User Id": "f9f58d0942a46bc8"
+  }
+],
+[
+  {
+    "Event": "The Signature Screen starts",
+    "Timestamp": "2023-12-05T22:19:23.430025",
+    "type": "Signature",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "User Signature",
+    "Signature": "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",
+    "Timestamp": "2023-12-05T22:19:24.765368",
+    "type": "Signature",
+    "User Id": "f9f58d0942a46bc8"
+  }
+],
+[
+  {
+    "Event": "The Privacy Screen starts",
+    "Timestamp": "2023-12-05T22:18:53.030846",
+    "type": "Instrucion",
+    "User Id": "f9f58d0942a46bc8"
+  },
+  {
+    "Event": "The Privacy ends",
+    "Timestamp": "2023-12-05T22:19:24.792793",
+    "type": "Instrucion",
+    "User Id": "f9f58d0942a46bc8"
+  }
+],
