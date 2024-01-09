@@ -11,7 +11,7 @@ services:
 
   flutter_app_1:
     build:
-      context: ./firstmotflutter
+      context: ./lock_tracker
       dockerfile: Dockerfile
     ports:
       - "80:80"
@@ -20,7 +20,7 @@ services:
 
   flutter_app_2:
     build:
-      context: ./query
+      context: ./AdminTool
       dockerfile: Dockerfile
     ports:
       - "8081:80" # Assuming it's also a web app served over port 80
