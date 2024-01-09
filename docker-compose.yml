@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  nodejs_app:
+    build:
+      context: ./my_server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+
+  flutter_app_1:
+    build:
+      context: ./firstmotflutter
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - my_network
+
+  flutter_app_2:
+    build:
+      context: ./query
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80" # Assuming it's also a web app served over port 80
+    networks:
+      - my_network
+networks:
+  my_network:
