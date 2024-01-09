@@ -63,17 +63,6 @@ class _PasswortEingabeScreenState extends State<PasswortEingabeScreen> {
         "password": _passwortController.text,
       });
       jsonLogMessages.add({
-        "type": "Configurations",
-        "numberOfShapes": configData.numberOfShapes,
-        "shapeSize": configData.shapeSize,
-        "movementDuration": configData.movementDuration,
-        "speed": configData.speed,
-        "shapeType": configData.shapeType.toString(),
-        "textColor": configData.textColor.toString(),
-        "shapeColor": configData.shapeColor.toString(),
-        "backgroundColor": configData.backgroundColor.toString(),
-      });
-      jsonLogMessages.add({
         "type": "Event",
         "description": "Password Screen ends",
         "timestamp": DateTime.now().toIso8601String(),

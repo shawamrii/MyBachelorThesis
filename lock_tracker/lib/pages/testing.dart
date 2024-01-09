@@ -500,7 +500,8 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
                       testsCounter == 1 &&
                           reloadCounter == 1 &&
                           aktuelleWiederholung ==
-                              1), // Updated to a more generic painter
+                              1,
+                      configData.lineWidth), // Updated to a more generic painter
                 ),
               ),
             ),

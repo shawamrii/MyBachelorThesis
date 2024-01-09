@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:lock_tracker/services/configData.dart';
 
 enum ShapeType {
   circle,
@@ -140,15 +141,43 @@ class ShapePainter extends CustomPainter {
   final List<Shape> shapes;
   Map<String, TextPainter> textPaintersCache = {};
   final bool shouldRepaintFlag;
+  final double lineWidth;
+  ShapePainter(this.shapes, this.shouldRepaintFlag,this.lineWidth);
 
-  ShapePainter(this.shapes, this.shouldRepaintFlag);
+  int calculateGridWidth(int totalShapes) {
+    int sqrtValue = sqrt(totalShapes).floor();
+    while (totalShapes % sqrtValue != 0) {
+      sqrtValue--;
+    }
+    return sqrtValue;
+  }
+
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    for (var shape in shapes) {
-      paint.color = shape.shapeColor ?? Colors.black;
-      if (shape is Circle) {
+    int gridWidth = calculateGridWidth(shapes.length);
+    // First, draw lines between shapes
+    paint.strokeWidth = lineWidth;
+    paint.style = PaintingStyle.fill;
+    paint.color = shapes[0].shapeColor??Colors.black;
+    if (lineWidth != 0.0) {
+      for (int i = 0; i < shapes.length; i++) {
+        // Connect to the right neighbor if not on the right edge
+        if ((i + 1) % gridWidth != 0 && i + 1 < shapes.length) {
+          canvas.drawLine(shapes[i].position, shapes[i + 1].position, paint);
+        }
+        // Connect to the bottom neighbor if not on the bottom edge
+        if (i + gridWidth < shapes.length) {
+          canvas.drawLine(shapes[i].position, shapes[i + gridWidth].position, paint);
+        }
+      }
+    }
+
+    // Then, draw each shape and its text
+    // Paint for the shape border
+    for (Shape shape in shapes) {
+    if (shape is Circle) {
         canvas.drawCircle(shape.position, shape.radius, paint);
       } else if (shape is Square) {
         final rect = Rect.fromCenter(
@@ -157,13 +186,18 @@ class ShapePainter extends CustomPainter {
           height: shape.sideLength,
         );
         canvas.drawRect(rect, paint);
-      }
-      // Draw the shape ID as text for both shapes
+
+    }
+
+      // Draw the shape ID as text
       final textPainter = _getTextPainter(shape.id, shape.textColor);
-      final offset = Offset(shape.position.dx - (textPainter.width / 2),
-          shape.position.dy - (textPainter.height / 2));
+      final offset = Offset(
+          shape.position.dx - (textPainter.width / 2),
+          shape.position.dy - (textPainter.height / 2)
+      );
       textPainter.paint(canvas, offset);
     }
+
   }
 
   TextPainter _getTextPainter(String text, Color? textColor) {

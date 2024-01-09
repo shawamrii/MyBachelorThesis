@@ -60,6 +60,8 @@ class _ConfigScreenState extends State<ConfigScreen> {
   ];
 
   Future<void> saveAndGo(ServerConnectivityService connectivityService, ConfigData configData) async {
+    jsonLogMessages.add(configData.toJson());
+
     Map<String, dynamic> logMessage = {
       "Event": "Setting Screen ends",
       "Timestamp": DateTime.now().toIso8601String(),
@@ -189,16 +191,22 @@ class _ConfigScreenState extends State<ConfigScreen> {
                 // });*/
               },
             ),
+            Text("Linienbreite: ${configData.lineWidth}"),
+            Slider(
+              value: configData.lineWidth,
+              onChanged: (double newValue) {
+                configData.updateLineWidth(newValue);
+              },
+              min: 0.0,
+              max: 10.0,
+              divisions: 20,
+              label: configData.lineWidth.toString(),
+            ),
             Text("Größe: ${configData.shapeSize}"),
             Slider(
               value: configData.shapeSize.roundToDouble(),
               onChanged: (double newValue) {
                 configData.updateShapeSize(newValue);
-/*
-                setState(() {
-                  _configData.shapeSize = newValue.roundToDouble();
-                });
-*/
               },
               min: 1,
               max: max(

@@ -9,6 +9,8 @@ class ConfigData with ChangeNotifier {
   ShapeType shapeType;
   late int numberOfShapes;
   double shapeSize;
+  //bool withLines;
+  double lineWidth;
   int movementDuration;
   double speed;
   Color? textColor;
@@ -28,9 +30,30 @@ class ConfigData with ChangeNotifier {
     this.backgroundColor = Colors.black,
     this.password = "",
     this.language = Language.DE,
+    this.lineWidth=0.0,
   }) {
     numberOfShapes = calculateNumberOfShapes(maxPasswortLaenge);
   }
+
+    Map<String, dynamic>  toJson() {
+    return {
+      "Event": "Settings",
+      'Password length': maxPasswortLaenge,
+      'shapeType': shapeType,
+      'numberOfShapes': numberOfShapes,
+      'shapeSize': shapeSize,
+      'lineWidth': lineWidth,
+      'movementDuration': movementDuration,
+      'speed': speed,
+      'textColor': textColor,
+      'shapeColor': shapeColor,
+      'backgroundColor': backgroundColor,
+      //'password': password,
+      'language': language,
+      "Timestamp": DateTime.now().toIso8601String(),
+    };
+  }
+
 
   void updateMaxPasswordLength(int length) {
     maxPasswortLaenge = length;
@@ -80,6 +103,10 @@ class ConfigData with ChangeNotifier {
 
   void updatePassword(String newPass) {
     password = newPass;
+    notifyListeners();
+  }
+  void updateLineWidth(double width) {
+    lineWidth = width;
     notifyListeners();
   }
 

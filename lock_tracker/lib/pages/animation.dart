@@ -183,6 +183,7 @@ class _AnimationScreenState extends State<AnimationScreen>
               await _onTap("Square", id,
                   password[aktuelleWiederholung - 1] == id, startAnimation);
             },
+
             shapeColor: shapeColor,
             textColor: configData.textColor,
           ),
@@ -417,7 +418,8 @@ class _AnimationScreenState extends State<AnimationScreen>
                       shapes,
                       reloadCounter == 1 &&
                           widget.aktuelleWiederholung ==
-                              1), // Updated to a more generic painter
+                              1,
+                      configData.lineWidth), // Updated to a more generic painter
                 ),
               ),
             ),
