@@ -1,0 +1,13 @@
+{
+  "Password length": 1,
+  "shapeType": "square",
+  "numberOfShapes": 4,
+  "shapeSize": 57,
+  "lineWidth": 5,
+  "movementDuration": 3,
+  "speed": 4,
+  "textColor": "MaterialColor(primary value: Color(0xff009688))",
+  "shapeColor": "MaterialColor(primary value: Color(0xff4caf50))",
+  "backgroundColor": "MaterialColor(primary value: Color(0xff009688))",
+  "language": "DE"
+}
