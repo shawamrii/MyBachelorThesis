@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:lock_tracker/pages/password.dart';
 import 'package:lock_tracker/pages/settings.dart';
 import 'package:provider/provider.dart';
+import '../services/closeDialog.dart';
 import '../services/collision_services.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
 import '../services/json_maker.dart';
 import '../services/shapes.dart';
 import 'animation.dart';
+import 'bmsSurvey.dart';
 import 'passwordDialog.dart';
 
 class AnimationTestingScreen extends StatefulWidget {
@@ -51,9 +53,9 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
     configData = Provider.of<ConfigData>(context, listen: false);
     Map<String, dynamic> logMessage = {
       "Event": "The Test Animation Screen starts",
-      "Game Nr.": testsCounter,
+      "Test Nr.": testsCounter,
       "Reload Nr.": reloadCounter,
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
@@ -77,9 +79,9 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
         reloadCounter++;
         Map<String, dynamic> logMessage = {
           "Event": "The Test Animation Screen starts",
-          "Game Nr.": testsCounter,
+          "Test Nr.": testsCounter,
           "Reload Nr.": reloadCounter,
-          "Round": widget.aktuelleWiederholung,
+          "Round Nr.": widget.aktuelleWiederholung,
           "Timestamp": DateTime.now().toIso8601String(),
         };
         jsonLogMessages.add(logMessage);
@@ -229,12 +231,14 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
     // Close the animation screen
     Map<String, dynamic> logMessage = {
       "Event": "Close button clicked",
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Reload Nr.": reloadCounter,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
-    if (mounted) {
+    showExitConfirmationDialog(context,connectivityService,jsonLogMessages,"Test",configData.language);
+
+/*    if (mounted) {
       if (kIsWeb) {
         await sendJsonToServer( jsonLogMessages, "Test",connectivityService);
       } else {
@@ -245,27 +249,36 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
 
         ),
       ));
-    }
+    }*/
   }
   Future<void> _skip(ServerConnectivityService connectivityService) async {
     Map<String, dynamic> logMessage = {
       "Event": "Skip The Animation Test Screen",
-      "Game Nr.": testsCounter,
+      "Test Nr.": testsCounter,
       "Reload Nr.": reloadCounter,
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
     sendJsonToServer( jsonLogMessages, "Test", connectivityService);
     if(mounted) {
       Navigator.of(context).pop(); // Close the dialog
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => BmsSurveyWidget(
+            index: 1,
+            screenSize : screenSize,
+          ),
+        ),
+      );
+
+      /* BMS kommt anstatt
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => AnimationScreen(
           aktuelleWiederholung: 1,
           screenSize: screenSize,
-
         ),
-      ));
+      ));*/
     }
   }
 
@@ -276,7 +289,7 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
     Map<String, dynamic> logMessage = {
       "Event": "Reload Button clicked",
       "Reload Nr.": reloadCounter,
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
@@ -291,10 +304,10 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
     }
     Map<String, dynamic> logMessage = {
       "Event": "Test Animation Screen touched",
-      "Game Nr.": testsCounter,
+      "Test Nr.": testsCounter,
       "Reload Nr.": reloadCounter,
       "Position.": details.globalPosition.toString(),
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
@@ -333,7 +346,7 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
     Map<String, dynamic> logMessage = {
       "type": "AnimationTest",
       "Event": "Play button clicked",
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Reload Nr.": reloadCounter,
       "Timestamp": DateTime.now().toIso8601String(),
     };
@@ -379,10 +392,10 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
   Future<void> _naechsteWiederholung(ServerConnectivityService connectivityService) async {
     if (widget.aktuelleWiederholung < configData.maxPasswortLaenge) {
       Map<String, dynamic> logMessage = {
-        "Event": "The Test Animation Game ends",
-        "Game Nr.": testsCounter,
+        "Event": "The Test Animation Test ends",
+        "Test Nr.": testsCounter,
         "Reload Nr.": reloadCounter,
-        "Round": widget.aktuelleWiederholung,
+        "Round Nr.": widget.aktuelleWiederholung,
         "Timestamp": DateTime.now().toIso8601String(),
       };
       jsonLogMessages.add(logMessage);
@@ -398,9 +411,9 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
       // Ende der Wiederholungen
       Map<String, dynamic> logMessage = {
         "Event": "The Animation Test Game finished",
-        "Game Nr.": testsCounter,
+        "Test Nr.": testsCounter,
         "Reload Nr.": reloadCounter,
-        "Round": widget.aktuelleWiederholung,
+        "Round Nr.": widget.aktuelleWiederholung,
         "Timestamp": DateTime.now().toIso8601String(),
       };
       jsonLogMessages.add(logMessage);
@@ -440,16 +453,16 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
                 onPressed: () {
                   _play();
                 },
-                tooltip: 'Animation Starten',
+                tooltip: 'Start',
               ),
             IconButton(
               icon: const Icon(Icons.restart_alt),
               onPressed: () async {
                 Map<String, dynamic> logMessage = {
                   "Event": "Reload The Animation Test Screen",
-                  "Game Nr.": testsCounter,
+                  "Test Nr.": testsCounter,
                   "Reload Nr.": reloadCounter,
-                  "Round": widget.aktuelleWiederholung,
+                  "Round Nr.": widget.aktuelleWiederholung,
                   "Timestamp": DateTime.now().toIso8601String(),
                 };
                 jsonLogMessages.add(logMessage);
@@ -468,7 +481,7 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
               onPressed: () async {
                 _skip(connectivityService);
               },
-              tooltip: 'Restart',
+              tooltip: 'Skip',
             ),
 
             IconButton(
@@ -476,7 +489,7 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
               onPressed: () async {
                 await _close(context,connectivityService);
               },
-              tooltip: 'Close Animation',
+              tooltip: 'Close',
             ),
             IconButton(
               icon: const Icon(Icons.refresh),
@@ -501,7 +514,7 @@ class _AnimationTestingScreenState extends State<AnimationTestingScreen>
                           reloadCounter == 1 &&
                           aktuelleWiederholung ==
                               1,
-                      configData.lineWidth), // Updated to a more generic painter
+                      configData.lineWidth,screenSize), // Updated to a more generic painter
                 ),
               ),
             ),

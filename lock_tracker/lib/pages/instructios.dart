@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
+import 'package:lock_tracker/pages/password.dart';
 import 'package:provider/provider.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
@@ -53,10 +54,11 @@ class _AcceptanceScreenState extends State<AcceptanceScreen> {
       jsonLogMessages.add(logMessage);
       // Navigate to the BmsSurveyWidget
       await sendJsonToServer(jsonLogMessages,"Instrucion",connectivityService);
-      Navigator.of(context).push(
+      Navigator.push(
+        context,
         MaterialPageRoute(
-          builder: (context) => const BmsSurveyWidget(
-            index: 1,
+          builder: (context) => PasswortEingabeScreen(
+            testsCounter: 1,
           ),
         ),
       );

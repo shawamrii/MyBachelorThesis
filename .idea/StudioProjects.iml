@@ -9,6 +9,12 @@
       <excludeFolder url="file://$MODULE_DIR$/query/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/query/build" />
       <excludeFolder url="file://$MODULE_DIR$/query/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/AdminTool/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/AdminTool/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/AdminTool/build" />
+      <excludeFolder url="file://$MODULE_DIR$/lock_tracker/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/lock_tracker/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/lock_tracker/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

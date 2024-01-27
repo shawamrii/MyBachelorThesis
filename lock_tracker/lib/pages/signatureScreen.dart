@@ -3,9 +3,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:lock_tracker/services/configData.dart';
 import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
 
+import '../services/closeDialog.dart';
 import '../services/connectivity.dart';
 import '../services/json_maker.dart';
 
@@ -60,6 +62,15 @@ class _SignatureScreenState extends State<SignatureScreen> {
       appBar: AppBar(
         title: const Text('Unterschreiben'),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () async {
+            await showExitConfirmationDialog(context,connectivityService,jsonLogMessages,"Signature",Language.EN);
+          },
+          tooltip: 'Close',
+        ),
+        ],
       ),
       body: Column(
         children: [

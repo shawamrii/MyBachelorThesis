@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:lock_tracker/pages/testing.dart';
 import 'package:provider/provider.dart';
+import '../services/closeDialog.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
 import '../services/json_maker.dart';
@@ -96,9 +97,18 @@ class _PasswortEingabeScreenState extends State<PasswortEingabeScreen> {
     final connectivityService = Provider.of<ServerConnectivityService>(context, listen: false);
     final configData = Provider.of<ConfigData>(context);
     return Scaffold(
-      /*appBar: AppBar(
+      appBar: AppBar(
         title: const Text('Passwort Eingabe'),
-      ),*/
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () async {
+              await showExitConfirmationDialog(context,connectivityService,jsonLogMessages,"Password",configData.language);
+            },
+            tooltip: 'Close',
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -106,6 +116,7 @@ class _PasswortEingabeScreenState extends State<PasswortEingabeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Text(configData.language==Language.DE ? "Für das Passwort dürfen Sie Ziffern und englische Buchstaben verwenden, jedoch keine Sonderzeichen. Das Passwort muss genau $maxPasswortLaenge Zeichen lang sein." : "For the password, you may use digits and English letters, but no special characters. The password must be exactly $maxPasswortLaenge characters long"),
               TextFormField(
                 controller: _passwortController,
                 maxLength: maxPasswortLaenge,

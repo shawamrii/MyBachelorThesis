@@ -1,10 +1,11 @@
 // ignore_for_file: file_names
+import 'bmsData.dart';
 import 'configData.dart';
 
 class SusQuestion{
   late String question;
   late int answer;
-  SusQuestion({this.question="",this.answer=1});
+  SusQuestion({this.question="",this.answer=3});
 }
 
 class SusSurvey{
@@ -20,29 +21,29 @@ class SusSurvey{
   List<SusQuestion> initialize(Language lng){
     if(lng == Language.EN){
       susQuestions = [
-        SusQuestion(question: "I would like to use the system more often", ),
-        SusQuestion(question: "I find the system unnecessarily complex", ),
-        SusQuestion(question: "I find the system was easy to operate", ),
-        SusQuestion(question: "I felt that I had control over the system during operation",),
-        SusQuestion(question: "I find the system was cumbersome to operate", ),
-        SusQuestion(question: "I really liked the presentation of the system",),
-        SusQuestion(question: "I felt that the system was much too fast", ),
-        SusQuestion(question: "I had fun using the system", ),
-        SusQuestion(question: "I had to learn many things before I could get started with this system",),
-        SusQuestion(question: "I could imagine that most people would learn very quickly to use this system",),
+        SusQuestion(question: "I feel the desire to use this system frequently."),
+        SusQuestion(question: "I perceive the system as unnecessarily complex."),
+        SusQuestion(question: "I think the system is easy to use."),
+        SusQuestion(question: "I feel in control when using this system."),
+        SusQuestion(question: "I find the system cumbersome to use."),
+        SusQuestion(question: "I really like the way this system is presented."),
+        SusQuestion(question: "I feel that the system operates too quickly."),
+        SusQuestion(question: "Using the system is enjoyable for me."),
+        SusQuestion(question: "I needed to learn a lot before I could use this system effectively."),
+        SusQuestion(question: "I think most people would learn to use this system quickly."),
       ];
     } else if(lng == Language.DE){
       susQuestions = [
-        SusQuestion(question: "Ich würde das System gerne häufiger verwenden", ),
-        SusQuestion(question: "Ich finde das System unnötig komplex", ),
-        SusQuestion(question: "Ich finde, das System war leicht zu bedienen", ),
-        SusQuestion(question: "Ich hatte das Gefühl, bei der Bedienung die Kontrolle über das System zu haben", ),
-        SusQuestion(question: "Ich finde, das System war umständlich zu bedienen", ),
-        SusQuestion(question: "Mir hat die Darstellung des Systems sehr gut gefallen",),
-        SusQuestion(question: "Ich hatte das Gefühl, dass das System viel zu schnell ablief",),
-        SusQuestion(question: "Die Benutzung hat mir Spaß gemacht", ),
-        SusQuestion(question: "Ich musste viele Dinge lernen, bevor ich mit diesem System loslegen konnte",),
-        SusQuestion(question: "Ich könnte mir vorstellen, dass die meisten Menschen sehr schnell lernen würden, mit diesem System umzugehen", ),
+        SusQuestion(question: "Ich möchte dieses System gerne häufiger nutzen."),
+        SusQuestion(question: "Ich empfinde das System als unnötig komplex."),
+        SusQuestion(question: "Ich finde, das System ist einfach zu bedienen."),
+        SusQuestion(question: "Ich fühle mich beim Benutzen dieses Systems in Kontrolle."),
+        SusQuestion(question: "Ich finde das System umständlich zu bedienen."),
+        SusQuestion(question: "Mir gefällt die Darstellung dieses Systems sehr."),
+        SusQuestion(question: "Ich habe das Gefühl, dass das System zu schnell arbeitet."),
+        SusQuestion(question: "Die Nutzung des Systems macht mir Spaß."),
+        SusQuestion(question: "Ich musste viel lernen, bevor ich dieses System effektiv nutzen konnte."),
+        SusQuestion(question: "Ich denke, dass die meisten Menschen dieses System schnell erlernen würden."),
       ];
     }
     return susQuestions;

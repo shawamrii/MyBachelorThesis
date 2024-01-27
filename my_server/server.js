@@ -135,7 +135,18 @@ app.post('/upload/:filename', (req, res) => {
     });
   });
 });
+//get the Configuration
+app.get('/getJson', (req, res) => {
+  const filePath = path.join(__dirname, 'configurations_data.json');
 
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).send('Error reading file.');
+    }
+    res.json(JSON.parse(data));
+  });
+});
 
 
 //Admin endpoints start
@@ -156,6 +167,26 @@ app.get('/files', (req, res) => {
     res.json(fileList);
   });
 });
+// Endpoint to receive JSON data
+app.post('/sendJson', (req, res) => {
+  const jsonData = req.body;
+  console.log('Received JSON data:', jsonData);
+
+  // We can process the jsonData here as needed
+   // Define a file path
+    const filePath = path.join(__dirname, 'configurations_data.json');
+
+    // Write the JSON data to a file
+    fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), (err) => {
+      if (err) {
+        console.error('Error writing file:', err);
+        return res.status(500).send('Error writing file.');
+      }
+  // Send a response back to the client
+  res.status(200).send({ message: 'JSON data received successfully.' });
+});
+});
+
 // Endpoint to get the content of a specific file
 app.get('/file-content/:filename', (req, res) => {
   const { filename } = req.params;
@@ -171,7 +202,7 @@ app.get('/file-content/:filename', (req, res) => {
 });
 
 
-app.delete('/files/:filename', (req, res) => {
+app.delete('/remove/:filename', (req, res) => {
   const { filename } = req.params;
   const filepath = path.join(uploadsDir, filename);
 

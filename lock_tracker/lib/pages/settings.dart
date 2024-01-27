@@ -1,15 +1,16 @@
 // ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
-
+import 'dart:convert';
 import 'dart:math';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
 import '../services/json_maker.dart';
 import '../services/screen_infos.dart';
-import '../services/shapes.dart';
 import 'instructios.dart';
+import 'package:http/http.dart' as http;
+
 
 class ConfigScreen extends StatefulWidget {
   const ConfigScreen({super.key});
@@ -21,18 +22,21 @@ class ConfigScreen extends StatefulWidget {
 class _ConfigScreenState extends State<ConfigScreen> {
   List<Map<String, dynamic>> jsonLogMessages = [];
   late ServerConnectivityService connectivityService;
+  late ConfigData configData;
+
   @override
   void initState() {
     super.initState();
-    connectivityService = Provider.of<ServerConnectivityService>(context, listen: false);
+    fetchJsonData();
     Map<String, dynamic> logMessage = {
       "Event": "Setting Screen starts",
       "Timestamp": DateTime.now().toIso8601String(),
     };
-    jsonLogMessages.add(logMessage);
-    // Postpone the async call until after the current frame.
     WidgetsBinding.instance.addPostFrameCallback((_) async => _initAsync());
+    jsonLogMessages.add(logMessage);
+
   }
+
 
   @override
   void dispose() {
@@ -48,18 +52,8 @@ class _ConfigScreenState extends State<ConfigScreen> {
     }
   }
 
-  final List<Color> _availableColors = [
-    Colors.blue,
-    Colors.red,
-    Colors.green,
-    Colors.yellow,
-    Colors.purple,
-    Colors.black,
-    Colors.white,
-    Colors.teal,
-  ];
-
-  Future<void> saveAndGo(ServerConnectivityService connectivityService, ConfigData configData) async {
+  Future<void> saveAndGo(ServerConnectivityService connectivityService,
+      ConfigData configData) async {
     jsonLogMessages.add(configData.toJson());
 
     Map<String, dynamic> logMessage = {
@@ -68,17 +62,34 @@ class _ConfigScreenState extends State<ConfigScreen> {
     };
     jsonLogMessages.add(logMessage);
     if (mounted) {
-      await sendJsonToServer( jsonLogMessages, "Setting",connectivityService);
+      await sendJsonToServer(jsonLogMessages, "Setting", connectivityService);
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const AcceptanceScreen(
-        ),
+        builder: (context) => const AcceptanceScreen(),
       ));
     }
   }
 
+  Future<void> fetchJsonData() async {
+    String serverUrl = kIsWeb ? "http://localhost:3000" : "http://10.0.2.2:3000";
+    final String url = '$serverUrl/getJson';
+    final response = await http.get(Uri.parse(url));
+
+    if (connectivityService.isServerOnline) {
+      var jsonData = json.decode(response.body);
+      configData.updateWithJson(jsonData);  // Pass the jsonData directly
+      if (kDebugMode) {
+        print(configData.toJson().toString());
+      }
+    } else {
+      throw Exception('Failed to load JSON data from Server');
+    }
+    configData.updateShapeSize(calculateMaxShapeSize(configData.numberOfShapes));
+    print(configData.toJson().toString());
+  }
+
   double calculateMaxShapeSize(int numberOfShapes) {
-    if (numberOfShapes == 0) {
-      return 25;
+    if (numberOfShapes <= 10) {
+      return configData.shapeSize;
     } else {
       // Here we get the actual screen size from the MediaQuery
       Size actualScreenSize = MediaQuery.of(context).size;
@@ -97,249 +108,54 @@ class _ConfigScreenState extends State<ConfigScreen> {
       double widthWithoutAppBar = actualScreenSize.width;
       final int numShapesSide = sqrt(numberOfShapes).ceil();
       // Calculate maximum size for each shape
-      final maxShapeWidth = widthWithoutAppBar / numShapesSide;
-      final maxShapeHeight = heightWithoutAppBar / numShapesSide;
-      return (min(maxShapeWidth / 2, maxShapeHeight / 2)).roundToDouble();
+      final maxShapeWidth = widthWithoutAppBar>numShapesSide? widthWithoutAppBar/numShapesSide : widthWithoutAppBar;
+      final maxShapeHeight = heightWithoutAppBar>numShapesSide? heightWithoutAppBar/numShapesSide : heightWithoutAppBar;
+      //print("$maxShapeWidth,$maxShapeHeight,$numShapesSide");
+      return min(maxShapeWidth / 2, maxShapeHeight / 2).roundToDouble();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final connectivityService = Provider.of<ServerConnectivityService>(context, listen: false);
-    final configData = Provider.of<ConfigData>(context);
+    connectivityService = Provider.of<ServerConnectivityService>(context, listen: false);
+    configData = Provider.of<ConfigData>(context, listen: false);
     return Scaffold(
       appBar: AppBar(title: const Text("Einstellungen")),
       body: Center(
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          padding: const EdgeInsets.all(20.0),
-          children: [
-            TextField(
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: false),
-              decoration: InputDecoration(
-                labelText: 'Passwort Länge: ${configData.maxPasswortLaenge}',
-                border: const OutlineInputBorder(),
-              ),
-              controller: TextEditingController(
-                  text: configData.maxPasswortLaenge.toString()),
-              onChanged: (String value) {
-                final int? newValue = int.tryParse(value);
-                if (newValue != null && newValue >= 1 && newValue <= 20) {
-                  configData.updateMaxPasswordLength(newValue);
-                  int numberOfshapes = configData.calculateNumberOfShapes(newValue);
-                  configData.updateNumberOfShapes(numberOfshapes);
-                  double sizeOfshapes = calculateMaxShapeSize(numberOfshapes);
-                  configData.updateShapeSize(sizeOfshapes);
-/*                  setState(() {
-                    _configData.maxPasswortLaenge = newValue;
-                    _configData.numberOfShapes = _configData
-                        .berechneNumberOfShapes(_configData.maxPasswortLaenge);
-
-
-                    _configData.shapeSize =
-                        calculateMaxShapeSize(_configData.numberOfShapes);
-                  });*/
-                }
-              },
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            TextField(
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: false),
-              decoration: InputDecoration(
-                labelText: 'Anzahl der Objekte: ${configData.numberOfShapes}',
-                border: const OutlineInputBorder(),
-              ),
-              controller: TextEditingController(
-                  text: configData.numberOfShapes.toString()),
-              onChanged: (String value) {
-                final int? newValue = int.tryParse(value);
-                if (newValue != null && newValue >= 1 && newValue <= 30) {
-                  configData.updateNumberOfShapes(newValue);
-                  double sizeOfshapes = calculateMaxShapeSize(newValue);
-                  configData.updateShapeSize(sizeOfshapes);
-/*
-                  setState(() {
-                    _configData.numberOfShapes = newValue;
-                    _configData.shapeSize =
-                        calculateMaxShapeSize(_configData.numberOfShapes);
-                  });
-*/
-                }
-              },
-            ),
-            const Text("Darstellung"),
-            DropdownButton<ShapeType>(
-              value: configData.shapeType,
-              items: const <DropdownMenuItem<ShapeType>>[
-                DropdownMenuItem(
-                  value: ShapeType.circle,
-                  child: Text('Kreis'),
+        child: Consumer<ConfigData>(
+          builder: (context, configData, child) {
+            return ListView(
+              scrollDirection: Axis.vertical,
+              padding: const EdgeInsets.all(20.0),
+              children: [
+                const Text("Sprache der Umfragen"),
+                DropdownButton<Language>(
+                  value: configData.language,
+                  items: const <DropdownMenuItem<Language>>[
+                    DropdownMenuItem(
+                      value: Language.EN,
+                      child: Text('English'),
+                    ),
+                    DropdownMenuItem(
+                      value: Language.DE,
+                      child: Text('Deutsch'),
+                    ),
+                  ],
+                  onChanged: (Language? newValue) {
+                    configData.updateLanguage(newValue ?? Language.DE);
+                  },
                 ),
-                DropdownMenuItem(
-                  value: ShapeType.square,
-                  child: Text('Quadrat'),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    saveAndGo(connectivityService, configData);
+                  },
+                  child: const Text("Speichern"),
                 ),
+                const SizedBox(height: 20),
               ],
-              onChanged: (ShapeType? newValue) {
-                configData.updateShapeType(newValue??ShapeType.square);
-/*                // setState(() {
-                //   _configData.shapeType = newValue!;
-                // });*/
-              },
-            ),
-            Text("Linienbreite: ${configData.lineWidth}"),
-            Slider(
-              value: configData.lineWidth,
-              onChanged: (double newValue) {
-                configData.updateLineWidth(newValue);
-              },
-              min: 0.0,
-              max: 10.0,
-              divisions: 20,
-              label: configData.lineWidth.toString(),
-            ),
-            Text("Größe: ${configData.shapeSize}"),
-            Slider(
-              value: configData.shapeSize.roundToDouble(),
-              onChanged: (double newValue) {
-                configData.updateShapeSize(newValue);
-              },
-              min: 1,
-              max: max(
-                  calculateMaxShapeSize(configData.numberOfShapes)
-                      .roundToDouble(),
-                  10.1),
-              divisions: max(
-                  calculateMaxShapeSize(configData.numberOfShapes).toInt() - 1,
-                  1),
-              label: configData.shapeSize.toString(),
-            ),
-            Text("Animationsdauer: ${configData.movementDuration}"),
-            Slider(
-              value: configData.movementDuration.toDouble(),
-              onChanged: (double newValue) {
-                configData.updateMovementDuration(newValue.toInt());
-/*                setState(() {
-                  _configData.movementDuration = newValue.toInt();
-                });*/
-              },
-              min: 1,
-              max: 10,
-              divisions: 9,
-              label: configData.movementDuration.toString(),
-            ),
-            Text("Geschwindigkeit: ${configData.speed}"),
-            Slider(
-              value: configData.speed,
-              onChanged: (double newValue) {
-                configData.updateSpeed(newValue);
-/*                setState(() {
-                  _configData.speed = newValue;
-                });*/
-              },
-              min: 0.5,
-              max: 5,
-              divisions: 9,
-              label: configData.speed.toString(),
-            ),
-            const Text('Hintergrundfarbe'),
-            DropdownButton<Color>(
-              value: configData.backgroundColor,
-              hint: const Text('Hintergrundfarbe'),
-              onChanged: (Color? color) {
-                configData.updateBackgroundColor(color??Colors.black);
-/*                setState(() {
-                  _configData.backgroundColor = color ?? Colors.black;
-                });*/
-              },
-              items: _availableColors.map((Color color) {
-                return DropdownMenuItem<Color>(
-                  value: color,
-                  child: Container(
-                    width: 50,
-                    height: 20,
-                    color: color,
-                  ),
-                );
-              }).toList(),
-            ),
-            const Text('Textfarbe'),
-            DropdownButton<Color>(
-              value: configData.textColor,
-              hint: const Text('Textfarbe'),
-              onChanged: (Color? color) {
-                if (mounted) {
-                  configData.updateTextColor(color??Colors.black);
-/*                  setState(() {
-                    _configData.textColor = color ?? Colors.black;
-                    });*/
-                }
-              },
-              items: _availableColors.map((Color color) {
-                return DropdownMenuItem<Color>(
-                  value: color,
-                  child: Container(
-                    width: 50,
-                    height: 20,
-                    color: color,
-                  ),
-                );
-              }).toList(),
-            ),
-            const Text('Objektsfarbe'),
-            DropdownButton<Color>(
-              value: configData.shapeColor,
-              hint: const Text('Objektsfarbe'),
-              onChanged: (Color? color) {
-                configData.updateShapeColor(color??Colors.white);
-/*                setState(() {
-                  _configData.shapeColor = color ?? Colors.white;
-                  });*/
-              },
-              items: _availableColors.map((Color color) {
-                return DropdownMenuItem<Color>(
-                  value: color,
-                  child: Container(
-                    width: 50,
-                    height: 20,
-                    color: color,
-                  ),
-                );
-              }).toList(),
-            ),
-            const Text("Sprache der Umfragen"),
-            DropdownButton<Language>(
-              value: configData.language,
-              items: const <DropdownMenuItem<Language>>[
-                DropdownMenuItem(
-                  value: Language.EN,
-                  child: Text('Englisch'),
-                ),
-                DropdownMenuItem(
-                  value: Language.DE,
-                  child: Text('Deutsch'),
-                ),
-              ],
-              onChanged: (Language? newValue) {
-                configData.updateLanguage(newValue??Language.DE);
-/*                setState(() {
-                  _configData.language = newValue!;
-                });*/
-              },
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                saveAndGo(connectivityService,configData);
-              },
-              child: const Text("Speichern"),
-            ),
-            const SizedBox(height: 20),
-          ],
+            );
+          },
         ),
       ),
     );

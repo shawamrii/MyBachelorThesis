@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api, file_names
 
 import 'package:flutter/material.dart';
+import 'package:lock_tracker/pages/timeSurvey.dart';
 import 'package:provider/provider.dart';
+import '../services/closeDialog.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
 import '../services/json_maker.dart';
@@ -36,14 +38,7 @@ class _SusSurveyWidgetState extends State<SusSurveyWidget> {
   }
 
   void saveAndGoToNextPage(ServerConnectivityService connectivityService) async{
-    for (SusQuestion sus in susQuestions) {
-      Map<String, dynamic> logMessage = {
-        "SUS Question": sus.question,
-        "SUS Answer": sus.answer,
-        "Timestamp": DateTime.now().toIso8601String(),
-      };
-      jsonLogMessages.add(logMessage);
-    }
+
     Map<String,dynamic> logMessage={
       "Event":"SUS Survey ends",
       "Timestamp":DateTime.now().toIso8601String(),
@@ -55,7 +50,7 @@ class _SusSurveyWidgetState extends State<SusSurveyWidget> {
       setState(() {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const DemographicsSurvey(
+            builder: (context) => const TimeSurvey(
             ),
           ),
         );
@@ -67,10 +62,33 @@ class _SusSurveyWidgetState extends State<SusSurveyWidget> {
   @override
   Widget build(BuildContext context) {
     final connectivityService = Provider.of<ServerConnectivityService>(context, listen: false);
+    final List<String> sliderLabels = configData.language==Language.DE ? [
+    'Stimmt gar nicht zu',       // 1
+    'Stimmt eher nicht zu',      // 2
+    'Neutral',                   // 3
+    'Stimmt eher zu',           // 4
+    'Stimmt vollkommen zu'       // 5
+    ] : [
+      'Strongly Disagree',    // 1
+      'Somewhat Disagree',    // 2
+      'Neutral',              // 3
+      'Somewhat Agree',       // 4
+      'Strongly Agree'                // 5
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SUS Umfrage'),
+        title: Text(configData.language==Language.DE ?'Inwieweit stimmen Sie den folgenden Aussagen zu?' :"To what extent do you agree with the following statements"),
         automaticallyImplyLeading:false,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () async {
+              await showExitConfirmationDialog(context,connectivityService,jsonLogMessages,"SUS",Language.EN);
+            },
+            tooltip: 'Close',
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -85,15 +103,22 @@ class _SusSurveyWidgetState extends State<SusSurveyWidget> {
                     min: 1,
                     max: 5,
                     divisions: 4,
-                    label: susQuestions[index].answer.toString(),
+                    label: sliderLabels[susQuestions[index].answer - 1],
                     onChanged: (double value) {
                       setState(() {
                         susQuestions[index].answer = value.toInt();
                       });
+                      Map<String, dynamic> logMessage = {
+                        "SUS Question": susQuestions[index].question,
+                        "SUS Answer": susQuestions[index].answer,
+                        "Timestamp": DateTime.now().toIso8601String(),
+                      };
+                      jsonLogMessages.add(logMessage);
+
                     },
                   ),
                 );
-              },
+                },
             ),
           ),
           Padding(

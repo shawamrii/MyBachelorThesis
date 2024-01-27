@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:lock_tracker/services/configData.dart';
 
 enum ShapeType {
   circle,
@@ -40,6 +39,7 @@ abstract class Shape {
 
   void move(Size screenSize, double speed, double animationProgress,
       ShapeType shapeType);
+
 }
 
 class Circle extends Shape {
@@ -68,6 +68,7 @@ class Circle extends Shape {
   void move(Size screenSize, double speed, double animationProgress,
       ShapeType shapeType) {
     Random random = Random();
+
 
     // If 30% of the total move duration has passed since the last direction change
     if (animationProgress >= (lastDirectionChangeTime + 0.3) &&
@@ -142,7 +143,8 @@ class ShapePainter extends CustomPainter {
   Map<String, TextPainter> textPaintersCache = {};
   final bool shouldRepaintFlag;
   final double lineWidth;
-  ShapePainter(this.shapes, this.shouldRepaintFlag,this.lineWidth);
+  final Size screenSize;
+  ShapePainter(this.shapes, this.shouldRepaintFlag,this.lineWidth, this.screenSize);
 
   int calculateGridWidth(int totalShapes) {
     int sqrtValue = sqrt(totalShapes).floor();
@@ -151,26 +153,49 @@ class ShapePainter extends CustomPainter {
     }
     return sqrtValue;
   }
+/*
+  void initializeGridPositions(List<Shape> shapes, Size screenSize) {
+    int totalShapes = shapes.length;
+    int gridWidth = calculateGridWidth(totalShapes);
+    int gridHeight = (totalShapes / gridWidth).ceil();
 
+    double spacingX = screenSize.width / gridWidth;
+    double spacingY = screenSize.height / gridHeight;
+
+    for (int i = 0; i < totalShapes; i++) {
+      int row = i ~/ gridWidth;
+      int col = i % gridWidth;
+
+      double posX = spacingX * col + spacingX / 2; // Zentrum des Gitters
+      double posY = spacingY * row + spacingY / 2; // Zentrum des Gitters
+
+      shapes[i].position = Offset(posX, posY);
+    }
+  }
+*/
 
   @override
   void paint(Canvas canvas, Size size) {
+    //initializeGridPositions(shapes, screenSize);
     final paint = Paint();
     int gridWidth = calculateGridWidth(shapes.length);
-    // First, draw lines between shapes
+
+    // Setze die Paint-Eigenschaften
     paint.strokeWidth = lineWidth;
     paint.style = PaintingStyle.fill;
-    paint.color = shapes[0].shapeColor??Colors.black;
+    paint.color = shapes[0].shapeColor ?? Colors.black;
+
     if (lineWidth != 0.0) {
       for (int i = 0; i < shapes.length; i++) {
-        // Connect to the right neighbor if not on the right edge
-        if ((i + 1) % gridWidth != 0 && i + 1 < shapes.length) {
-          canvas.drawLine(shapes[i].position, shapes[i + 1].position, paint);
+        // Verbinde mit dem rechten Nachbarn oder dem entsprechenden linken, wenn am rechten Rand
+        int rightNeighbor = (i + 1) % gridWidth == 0 ? i + 1 - gridWidth : i + 1;
+        if (rightNeighbor < shapes.length) {
+          canvas.drawLine(shapes[i].position, shapes[rightNeighbor].position, paint);
         }
-        // Connect to the bottom neighbor if not on the bottom edge
-        if (i + gridWidth < shapes.length) {
-          canvas.drawLine(shapes[i].position, shapes[i + gridWidth].position, paint);
-        }
+
+        // Verbinde mit dem unteren Nachbarn oder dem entsprechenden oberen, wenn am unteren Rand
+        int bottomNeighbor = i + gridWidth >= shapes.length ? i + gridWidth - shapes.length : i + gridWidth;
+        canvas.drawLine(shapes[i].position, shapes[bottomNeighbor].position, paint);
       }
     }
 
@@ -199,10 +224,17 @@ class ShapePainter extends CustomPainter {
     }
 
   }
-
   TextPainter _getTextPainter(String text, Color? textColor) {
+    Shape shape =shapes[0];
+    double newfontSize =16;
+    if(shape is Circle) {newfontSize = shape.radius*0.7;}
+    if(shape is Square) {newfontSize = shape.sideLength*0.7;}
     if (!textPaintersCache.containsKey(text)) {
-      final textStyle = TextStyle(color: textColor, fontSize: 14);
+      final textStyle = TextStyle(
+          color: textColor,
+          fontSize: newfontSize,
+          fontWeight: FontWeight.bold // Add bold style here
+      );
       final textSpan = TextSpan(text: text, style: textStyle);
       final textPainter = TextPainter(
           text: textSpan,
@@ -214,9 +246,11 @@ class ShapePainter extends CustomPainter {
     return textPaintersCache[text]!;
   }
 
+
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     // Implement logic to determine if repainting is needed
     return shouldRepaintFlag;
   }
 }
+

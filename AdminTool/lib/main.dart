@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'apiServices/apiService.dart';
+import 'configuration.dart';
 
 void main() {
   runApp(const MyApp());
@@ -101,6 +102,16 @@ class MyHomePage extends StatelessWidget {
             onPressed: () async {
               await apiService.createFileOnServer("Hallo World!");
             },
+          ),
+
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              // Action to perform when settings icon is pressed
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ConfigScreen(),
+                ));
+                },
           ),
         ],
       ),

@@ -1,7 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:provider/provider.dart';
 
+import 'configData.dart';
 class ServerConnectivityService with ChangeNotifier {
   bool _isServerOnline = false;
   late String filename;
@@ -10,7 +14,7 @@ class ServerConnectivityService with ChangeNotifier {
   bool get isServerOnline => _isServerOnline;
 
   ServerConnectivityService() {
-    checkServerConnectivity(); // Rename to make public
+    checkServerConnectivity();
   }
 
   Future<void> checkServerConnectivity() async {
@@ -22,8 +26,13 @@ class ServerConnectivityService with ChangeNotifier {
     }
     notifyListeners();
   }
-  void updateFileName(String name){
-    filename=name;
+
+  void updateFileName(String name) {
+    filename = name;
     notifyListeners();
   }
+
+
+
+
 }

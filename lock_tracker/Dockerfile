@@ -15,21 +15,23 @@ ENV FLUTTER_HOME="/opt/flutter"
 ENV PATH="$PATH:$FLUTTER_HOME/bin:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools"
 
 # Download and install Android command line tools
-RUN mkdir -p $ANDROID_HOME/cmdline-tools && \
-    curl -o cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip && \
-    unzip cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools && \
-    mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest && \
-    rm cmdline-tools.zip \
+#RUN mkdir -p $ANDROID_HOME/cmdline-tools && \
+#    curl -o cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-6609375_latest.zip && \
+#    unzip cmdline-tools.zip -d $ANDROID_HOME/cmdline-tools && \
+#    mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest && \
+#    rm cmdline-tools.zip
+
 
 # Install Flutter SDK
 RUN git clone https://github.com/flutter/flutter.git -b stable $FLUTTER_HOME && \
     flutter doctor
 
+
 # Accept Android SDK licenses
-RUN yes | sdkmanager --licenses
+#RUN yes | sdkmanager --licenses
 
 # Install Android platforms and build-tools
-RUN sdkmanager "platform-tools" "platforms;android-29" "build-tools;29.0.3"
+#RUN sdkmanager "platform-tools" "platforms;a ndroid-29" "build-tools;29.0.3"
 
 # Set the working directory in the Docker image
 WORKDIR /app

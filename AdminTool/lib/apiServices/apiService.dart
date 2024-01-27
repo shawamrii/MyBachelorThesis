@@ -8,6 +8,31 @@ import 'dart:html' as html;
 
 class ApiService {
   final String baseUrl = "http://localhost:3000"; // Use your server's IP for a real device
+  // Method to send JSON data to the server
+  Future<void> sendJsonToServer(Map<String, dynamic> data) async {
+    var uri = Uri.parse('$baseUrl/sendJson'); // Update with your endpoint URL
+
+    try {
+      var response = await http.post(
+        uri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(data),
+      );
+
+      if (response.statusCode == 200) {
+        print('Data sent successfully');
+      } else {
+        print('Failed to send data. Status code: ${response.statusCode}');
+        throw Exception('Failed to send data. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error sending data: $e');
+      throw Exception('Error sending data: $e');
+    }
+  }
+
 
   Future<List<dynamic>> getFiles() async {
     final response = await http.get(Uri.parse('$baseUrl/files'));
@@ -76,7 +101,7 @@ class ApiService {
 
   // Method to delete (remove) a file
   Future<void> removeFile(String filename) async {
-    final response = await http.delete(Uri.parse('$baseUrl/files/$filename'));
+    final response = await http.delete(Uri.parse('$baseUrl/remove/$filename'));
 
     if (response.statusCode != 200) {
       throw Exception('Failed to delete file: ${response.statusCode}');

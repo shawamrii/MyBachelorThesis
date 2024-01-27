@@ -7,6 +7,7 @@ import 'package:lock_tracker/services/json_maker.dart';
 import 'package:provider/provider.dart';
 import '../services/connectivity.dart';
 import 'animation.dart';
+import 'bmsSurvey.dart';
 
 
 class PasswordEndDialog extends StatefulWidget {
@@ -74,13 +75,14 @@ class _PasswordEndDialogState extends State<PasswordEndDialog> {
               // Navigate to another page
               if(mounted) {
                 Navigator.of(context).pop(); // Close the dialog
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => AnimationScreen(
-                        aktuelleWiederholung: 1,
-                        screenSize: widget.screenSize,
-
-                      ),
-                    ));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => BmsSurveyWidget(
+                      index: 1,
+                      screenSize : widget.screenSize,
+                    ),
+                  ),
+                );
               }
             },
             child: const Text('Weiter'),

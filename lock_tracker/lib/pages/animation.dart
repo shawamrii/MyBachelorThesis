@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:lock_tracker/pages/settings.dart';
 import 'package:provider/provider.dart';
+import '../services/closeDialog.dart';
 import '../services/collision_services.dart';
 import '../services/configData.dart';
 import '../services/connectivity.dart';
@@ -13,10 +14,10 @@ import '../services/shapes.dart';
 import 'bmsSurvey.dart';
 
 class AnimationScreen extends StatefulWidget {
-  final int aktuelleWiederholung;
+  late int aktuelleWiederholung;
   final Size screenSize;
 
-  const AnimationScreen({
+  AnimationScreen({
     super.key,
     required this.aktuelleWiederholung,
     required this.screenSize,
@@ -51,7 +52,7 @@ class _AnimationScreenState extends State<AnimationScreen>
     Map<String, dynamic> logMessage = {
       "type": "Animation",
       "Event": "The Animation Screen starts",
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Reload Nr.": reloadCounter,
       "Timestamp": DateTime.now().toIso8601String(),
     };
@@ -221,7 +222,7 @@ class _AnimationScreenState extends State<AnimationScreen>
     if (widget.aktuelleWiederholung < configData.maxPasswortLaenge) {
       Map<String, dynamic> logMessage = {
         "Event": "The Animation Screen ends",
-        "Round": widget.aktuelleWiederholung,
+        "Round Nr.": widget.aktuelleWiederholung,
         "Reload Nr.": reloadCounter,
         "Timestamp": DateTime.now().toIso8601String(),
       };
@@ -238,7 +239,7 @@ class _AnimationScreenState extends State<AnimationScreen>
       // Ende der Wiederholungen
       Map<String, dynamic> logMessage = {
         "Event": "The Animation Screen finished",
-        "Round": widget.aktuelleWiederholung,
+        "Round Nr.": widget.aktuelleWiederholung,
         "Reload Nr.": reloadCounter,
         "Timestamp": DateTime.now().toIso8601String(),
       };
@@ -251,8 +252,9 @@ class _AnimationScreenState extends State<AnimationScreen>
       if (mounted) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const BmsSurveyWidget(
+            builder: (context) => BmsSurveyWidget(
               index: 2,
+              screenSize: widget.screenSize,
             ),
           ),
         );
@@ -274,12 +276,13 @@ class _AnimationScreenState extends State<AnimationScreen>
     // Close the animation screen
     Map<String, dynamic> logMessage = {
       "Event": "Close button clicked",
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Reload Nr.": reloadCounter,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
-    if (mounted) {
+    showExitConfirmationDialog(context,connectivityService,jsonLogMessages,"Animation",configData.language);
+   /* if (mounted) {
       if (kIsWeb) {
         await sendJsonToServer( jsonLogMessages, "Animation",connectivityService);
       } else {
@@ -289,7 +292,7 @@ class _AnimationScreenState extends State<AnimationScreen>
         builder: (context) => const ConfigScreen(
         ),
       ));
-    }
+    }*/
   }
 
   Future<void> _refresh() async {
@@ -299,7 +302,7 @@ class _AnimationScreenState extends State<AnimationScreen>
     Map<String, dynamic> logMessage = {
       "Event": "Reload Button clicked",
       "Reload Nr.": reloadCounter,
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
@@ -316,7 +319,7 @@ class _AnimationScreenState extends State<AnimationScreen>
       "Event": "Animation Screen touched",
       "Reload Nr.": reloadCounter,
       "Position.": details.globalPosition.toString(),
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Timestamp": DateTime.now().toIso8601String(),
     };
     jsonLogMessages.add(logMessage);
@@ -332,7 +335,7 @@ class _AnimationScreenState extends State<AnimationScreen>
         "Event": "$shape touched",
         "ID": id,
         "Reload Nr.": reloadCounter,
-        "Round": widget.aktuelleWiederholung,
+        "Round Nr.": widget.aktuelleWiederholung,
         "isPin": isPin.toString(),
         "Timestamp": DateTime.now().toIso8601String(),
       };
@@ -355,7 +358,7 @@ class _AnimationScreenState extends State<AnimationScreen>
     Map<String, dynamic> logMessage = {
       "type": "Animation",
       "Event": "Play button clicked",
-      "Round": widget.aktuelleWiederholung,
+      "Round Nr.": widget.aktuelleWiederholung,
       "Reload Nr.": reloadCounter,
       "Timestamp": DateTime.now().toIso8601String(),
     };
@@ -387,21 +390,21 @@ class _AnimationScreenState extends State<AnimationScreen>
                 onPressed: () async {
                   await _play();
                 },
-                tooltip: 'Animation abspielen',
+                tooltip: 'Play',
               ),
             IconButton(
               icon: const Icon(Icons.close),
               onPressed: () async {
                 await _close(connectivityService,context);
               },
-              tooltip: 'Abbrechen',
+              tooltip: 'Close',
             ),
             IconButton(
               icon: const Icon(Icons.refresh),
               onPressed: () async {
                 await _refresh();
               },
-              tooltip: 'Aktualisieren',
+              tooltip: 'Refresh',
             ),
           ],
         ),
@@ -419,7 +422,7 @@ class _AnimationScreenState extends State<AnimationScreen>
                       reloadCounter == 1 &&
                           widget.aktuelleWiederholung ==
                               1,
-                      configData.lineWidth), // Updated to a more generic painter
+                      configData.lineWidth,screenSize), // Updated to a more generic painter
                 ),
               ),
             ),
